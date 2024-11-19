@@ -4,18 +4,11 @@ import RegisterPage from "./pages/RegisterPage";
 import DashboardLayout from "./layouts/DashboardLayout";
 import TablePage from "./pages/TablePage";
 import BooksPage from "./pages/BooksPage";
+import AuthLayout from "./layouts/AuthLayout";
 
 export const router = createBrowserRouter([
 	{
-		path: "/login",
-		element: <LoginPage />,
-	},
-	{
-		path: "/register",
-		element: <RegisterPage />,
-	},
-	{
-		path: "dashboard",
+		path: "/dashboard",
 		element: <DashboardLayout />,
 		children: [
 			{
@@ -25,6 +18,20 @@ export const router = createBrowserRouter([
 			{
 				path: "books",
 				element: <BooksPage />,
+			},
+		],
+	},
+	{
+		path: "/auth",
+		element: <AuthLayout />,
+		children: [
+			{
+				path: "login",
+				element: <LoginPage />,
+			},
+			{
+				path: "register",
+				element: <RegisterPage />,
 			},
 		],
 	},

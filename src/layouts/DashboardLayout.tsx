@@ -3,10 +3,11 @@ import { Link, Outlet } from "react-router-dom";
 function DashboardLayout() {
 	return (
 		<div>
-			<div id="navbar">
+			{/* //! navbar */}
+			<div id="navbar" className="border-b border-base-300">
 				<div className="navbar bg-base-100">
 					<div className="flex-1">
-						<a className="btn btn-ghost text-xl">daisyUI</a>
+						<a className="btn btn-ghost text-xl">Coder's Books</a>
 					</div>
 					<div className="flex-none gap-2">
 						<div className="form-control">
@@ -50,10 +51,11 @@ function DashboardLayout() {
 					</div>
 				</div>
 			</div>
+			{/* //! dashboard */}
 			<div id="dashboard" className="grid grid-cols-12 gap-1">
 				{/* //! sidebar */}
 				<div className="hidden sm:block sm:col-span-3  h-[calc(100vh-0.2rem)] bg-base-200 ">
-					<h1 className="text-2xl font-bold text-center my-3">Sidebar</h1>
+					<h1 className="text-2xl font-bold text-center my-3">Coder's Books</h1>
 					<div className="divider my-0 mx-0"></div>
 					<ul className="menu bg-base-200 w-full gap-5 mt-[15px]">
 						<li>
@@ -84,6 +86,7 @@ function DashboardLayout() {
 					</ul>
 				</div>
 				<div className="col-span-12 sm:col-span-9  h-[calc(100vh-5rem)]">
+					{/* //! dynamic content */}
 					<Outlet />
 				</div>
 			</div>
