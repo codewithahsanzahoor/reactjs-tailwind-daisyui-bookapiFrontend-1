@@ -1,6 +1,20 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 function LoginPage() {
+	//create use ref for email and password
+	const emailRef = React.useRef<HTMLInputElement>(null);
+	const passwordRef = React.useRef<HTMLInputElement>(null);
+	// console.log(emailRef, passwordRef);
+
+	//create function to handle login
+	const handleLoginSubmit = () => {
+		const email = emailRef.current?.value;
+		const password = passwordRef.current?.value;
+
+		console.log("data", { email, password });
+	};
+
 	return (
 		<>
 			<div className="flex justify-center items-center bg-base-200 min-h-screen">
@@ -18,7 +32,14 @@ function LoginPage() {
 									<path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
 									<path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
 								</svg>
-								<input type="text" className="grow" placeholder="Email" />
+								<input
+									ref={emailRef}
+									type="text"
+									className="grow"
+									placeholder="Email"
+									defaultValue=""
+									required
+								/>
 							</label>
 
 							<label className="input input-bordered input-md flex items-center gap-2">
@@ -34,14 +55,26 @@ function LoginPage() {
 										clipRule="evenodd"
 									/>
 								</svg>
-								<input type="password" className="grow" value="" />
+								<input
+									ref={passwordRef}
+									type="password"
+									className="grow"
+									placeholder="Password"
+									defaultValue=""
+									required
+								/>
 							</label>
-							<input
-								type="submit"
-								value="Login"
+							<button
 								className="btn btn-primary mt-4 font-semibold text-xl"
-							/>
-							<Link to="/register">
+								onClick={(e) => {
+									e.preventDefault();
+									handleLoginSubmit();
+								}}
+							>
+								Login
+							</button>
+
+							<Link to="/auth/register">
 								<button type="button" className="btn btn-link ">
 									Don't have a account want to Register
 								</button>

@@ -45,14 +45,19 @@ function RegisterPage() {
 										clipRule="evenodd"
 									/>
 								</svg>
-								<input type="password" className="grow" value="" />
+								<input
+									type="password"
+									className="grow"
+									value=""
+									placeholder="Password"
+								/>
 							</label>
 							<input
 								type="submit"
 								value="Register"
 								className="btn btn-primary mt-4 font-semibold text-xl"
 							/>
-							<Link to="/login">
+							<Link to="/auth/login">
 								<button type="button" className="btn btn-link ">
 									Already have a account want to Login
 								</button>
