@@ -7,6 +7,7 @@ import BooksPage from "./pages/BooksPage";
 import AuthLayout from "./layouts/AuthLayout";
 
 export const router = createBrowserRouter([
+	//? dashboard is the main layout and books is the nested layout , home is the nested layout
 	{
 		path: "/dashboard",
 		element: <DashboardLayout />,
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
 			},
 		],
 	},
+	//? this is the single page route that will be rendered when the url is /
 	{
 		path: "/",
 		element: <div className="">hello world</div>,

@@ -1,11 +1,18 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite package manager used is pnpm
+this project includes React, TypeScript and Vite.
+1. in it i am using axios for fetching data from an API and react-query for handling the data from the API. for further info you can read the documentation of axios and react-query.
+2. i am using react-router-dom for routing.
+3. i am using tailwindcss for styling the app.
+4. i am using daisyui for styling the app.
+5. remix icons for icons.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation steps:
+1. pnpm create vite@latest
+2. setup and install tailwindcss - (https://tailwindcss.com/docs/guides/vite)
+3. setup and install daisyui - (https://daisyui.com/docs/install/)
+4. setup and install react-router-dom - (https://reactrouter.com/en/main/start/tutorial)
+5. setup and install axios - (https://axios-http.com/docs/intro)
+6. setup and install react-query - (https://react-query.tanstack.com/)
 
 ## Expanding the ESLint configuration
 

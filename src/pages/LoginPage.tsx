@@ -1,18 +1,33 @@
 import React from "react";
+import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
+import { login } from "../http/api";
 
 function LoginPage() {
-	//create use ref for email and password
+	//? create use ref for email and password data from user input
 	const emailRef = React.useRef<HTMLInputElement>(null);
 	const passwordRef = React.useRef<HTMLInputElement>(null);
 	// console.log(emailRef, passwordRef);
 
-	//create function to handle login
+	//? create use mutation for login in react query
+	const mutation = useMutation({
+		mutationFn: login,
+		onSuccess: (data) => {
+			console.log("data", data);
+		},
+	});
+
+	//? create function to handle login and send data to backend
 	const handleLoginSubmit = () => {
 		const email = emailRef.current?.value;
 		const password = passwordRef.current?.value;
 
-		console.log("data", { email, password });
+		if (!email || !password) {
+			return alert("Please enter email and password");
+		}
+
+		mutation.mutate({ email, password });
+		// console.log("data", { email, password });
 	};
 
 	return (
