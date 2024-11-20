@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../http/api";
 
 function LoginPage() {
@@ -8,12 +8,15 @@ function LoginPage() {
 	const emailRef = React.useRef<HTMLInputElement>(null);
 	const passwordRef = React.useRef<HTMLInputElement>(null);
 	// console.log(emailRef, passwordRef);
+	const Navigate = useNavigate();
 
 	//? create use mutation for login in react query
 	const mutation = useMutation({
 		mutationFn: login,
 		onSuccess: (data) => {
-			console.log("data", data);
+			// console.log("data", data);
+			console.log("login successfully", data);
+			Navigate("/dashboard/home");
 		},
 	});
 
@@ -26,6 +29,7 @@ function LoginPage() {
 			return alert("Please enter email and password");
 		}
 
+		//? calling use mutation function will automatically send data to mutationFn in react query
 		mutation.mutate({ email, password });
 		// console.log("data", { email, password });
 	};
