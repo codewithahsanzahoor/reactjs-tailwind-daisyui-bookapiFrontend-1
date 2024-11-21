@@ -59,7 +59,7 @@ function DashboardLayout() {
 					<div className="divider my-0 mx-0"></div>
 					<ul className="menu bg-base-200 w-full gap-5 mt-[15px]">
 						<li>
-							<a>
+							<div>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="h-5 w-5"
@@ -75,13 +75,13 @@ function DashboardLayout() {
 									/>
 								</svg>
 								<Link to="/dashboard/home">Home</Link>
-							</a>
+							</div>
 						</li>
 						<li>
-							<a>
+							<div>
 								<i className="ri-git-repository-fill"></i>{" "}
 								<Link to="/dashboard/books">Books</Link>
-							</a>
+							</div>
 						</li>
 					</ul>
 				</div>

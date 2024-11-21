@@ -84,12 +84,21 @@ function LoginPage() {
 								/>
 							</label>
 							<button
-								className="btn btn-primary mt-4 font-semibold text-xl"
+								className={
+									mutation.isLoading
+										? "btn-disabled btn btn-primary mt-4 font-semibold text-xl"
+										: "btn btn-primary mt-4 font-semibold text-xl"
+								}
 								onClick={(e) => {
 									e.preventDefault();
 									handleLoginSubmit();
 								}}
 							>
+								{mutation.isLoading && (
+									<span>
+										<i className="ri-loader-4-fill animate-spin"></i>
+									</span>
+								)}{" "}
 								Login
 							</button>
 
