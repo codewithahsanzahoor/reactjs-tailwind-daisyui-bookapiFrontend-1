@@ -15,7 +15,8 @@ function LoginPage() {
 		mutationFn: login,
 		onSuccess: (data) => {
 			// console.log("data", data);
-			console.log("login successfully", data);
+			// console.log("login successfully", data);
+			localStorage.setItem("token", data.token);
 			Navigate("/dashboard/home");
 		},
 	});
