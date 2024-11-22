@@ -1,6 +1,21 @@
-import { Link, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function DashboardLayout() {
+	const navigate = useNavigate();
+	const token = localStorage.getItem("token");
+
+	useEffect(() => {
+		//NOTE: check if user is logged in through token, but here we are not verifying the token because our server api routes are secured using middleware
+		if (!token) {
+			navigate("/auth/login");
+		}
+	}, []);
+
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		navigate("/auth/login");
+	};
 	return (
 		<div>
 			{/* //! navbar */}
@@ -44,7 +59,7 @@ function DashboardLayout() {
 									<a>Settings</a>
 								</li>
 								<li>
-									<a>Logout</a>
+									<a onClick={handleLogout}>Logout</a>
 								</li>
 							</ul>
 						</div>
