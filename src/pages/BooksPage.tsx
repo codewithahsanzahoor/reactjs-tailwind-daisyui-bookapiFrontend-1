@@ -7,7 +7,7 @@ function BooksPage() {
 	const { data } = useQuery({
 		queryKey: ["books"],
 		queryFn: getBooks,
-		// staleTime: 1000 * 60 * 60,
+		staleTime: 1000 * 60 * 60,
 	});
 
 	return (

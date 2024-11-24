@@ -1,5 +1,5 @@
 import React from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { createBook } from "../http/api";
 
@@ -12,16 +12,18 @@ function CreateBookPage() {
 	const pdfRef = React.useRef<HTMLInputElement>(null);
 
 	const Navigate = useNavigate();
+	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
 		mutationFn: createBook, // Function to send data to backend
 		onSuccess: (data) => {
 			console.log("🚀 ~ CreateBookPage ~ data:", data);
+			queryClient.invalidateQueries({ queryKey: ["books"] });
 			Navigate("/dashboard/books");
 		},
 		onError: (error) => {
 			console.error("Error creating book:", error);
-			alert("Failed to create book. Please try again.");
+			// alert("Failed to create book. Please try again.");
 		},
 	});
 
@@ -33,7 +35,9 @@ function CreateBookPage() {
 			!imageRef.current?.files?.[0] ||
 			!pdfRef.current?.files?.[0]
 		) {
-			return alert("Please enter all required book data, including files.");
+			return alert(
+				"Please enter all required book data, including files."
+			);
 		}
 
 		// Prepare FormData for file upload
@@ -148,7 +152,9 @@ function CreateBookPage() {
 							</label>
 
 							<label className="input input-lg flex items-center gap-2 w-full input-bordered">
-								<span className="text-sm">Upload PNG, JPG, JPEG</span>
+								<span className="text-sm">
+									Upload PNG, JPG, JPEG
+								</span>
 								<input
 									type="file"
 									accept=".png, .jpg, .jpeg"
@@ -171,7 +177,8 @@ function CreateBookPage() {
 
 							{mutation.isError && (
 								<p className="text-red-600 text-center my-3">
-									"something went wrong in creating book please try again"
+									"something went wrong in creating book
+									please try again"
 								</p>
 							)}
 							<button
