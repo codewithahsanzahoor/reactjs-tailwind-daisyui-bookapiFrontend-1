@@ -69,7 +69,7 @@ function DashboardLayout() {
 			{/* //! dashboard */}
 			<div id="dashboard" className="grid grid-cols-12 gap-1">
 				{/* //! sidebar */}
-				<div className="hidden sm:block sm:col-span-3  h-[calc(100vh-0.2rem)] bg-base-200 ">
+				<div className="hidden sm:block sm:col-span-2  h-[calc(100vh-0.2rem)] bg-base-200 ">
 					<h1 className="text-2xl font-bold text-center my-3">Coder's Books</h1>
 					<div className="divider my-0 mx-0"></div>
 					<ul className="menu bg-base-200 w-full gap-5 mt-[15px]">
