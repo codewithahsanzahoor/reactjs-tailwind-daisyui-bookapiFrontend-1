@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Book } from "../types";
 //TODO: USE ENV WITH VITE TO GET BACKEND URL
 //? this is how we get the api url from the .env file in the vite project for react
 // const API_BACKEND_URL = import.meta.env.API_BACKEND_URL;
@@ -11,6 +12,20 @@ export const api = axios.create({
 		"Content-Type": "application/json",
 	},
 });
+
+//? create interceptor for api request to backend
+api.interceptors.request.use(
+	(config) => {
+		const token = localStorage.getItem("token");
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
+		return config;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+);
 
 //? create function to send login data to backend through api using axios
 export const login = async (data: {
@@ -27,5 +42,19 @@ export const register = async (data: {
 	password: string;
 }): Promise<{ message: string; token: string }> => {
 	const response = await api.post("/users/register", data);
+	return response.data;
+};
+
+export const getBooks = async (): Promise<Book[]> => {
+	const response = await api.get("/books");
+	return response.data;
+};
+
+export const createBook = async (data: FormData): Promise<{ id: string }> => {
+	const response = await api.post("/books", data, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	});
 	return response.data;
 };
