@@ -42,7 +42,9 @@ function RegisterPage() {
 				<div className="hero-content flex-col lg:flex-row-reverse">
 					<div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
 						<form className="card-body">
-							<h1 className="text-3xl font-bold text-center pb-7">Register</h1>
+							<h1 className="text-3xl font-bold text-center pb-7">
+								Register
+							</h1>
 							<label className="input input-bordered input-md flex items-center gap-2">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +105,8 @@ function RegisterPage() {
 							</label>
 							{mutation.isError && (
 								<p className="text-red-600 text-center my-3">
-									"something went wrong in registering please try again"
+									"something went wrong in registering please
+									try again"
 								</p>
 							)}
 							<button

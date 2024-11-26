@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardLayout from "./layouts/DashboardLayout";
@@ -6,6 +6,9 @@ import BooksPage from "./pages/BooksPage";
 import AuthLayout from "./layouts/AuthLayout";
 import HomePage from "./pages/HomePage";
 import CreateBookPage from "./pages/CreateBookPage";
+import DeleteBookPage from "./pages/DeleteBookPage";
+import BooksManageLayout from "./layouts/BooksManageLayout";
+import UpdateBookPage from "./pages/UpdateBookPage";
 
 export const router = createBrowserRouter([
 	//? dashboard is the main layout and books is the nested layout , home is the nested layout
@@ -25,6 +28,10 @@ export const router = createBrowserRouter([
 				path: "books/create",
 				element: <CreateBookPage />,
 			},
+			{
+				path: "books/update/:id",
+				element: <UpdateBookPage />,
+			},
 		],
 	},
 	{
@@ -41,9 +48,19 @@ export const router = createBrowserRouter([
 			},
 		],
 	},
+	{
+		path: "/books",
+		element: <BooksManageLayout />,
+		children: [
+			{
+				path: "delete/:id",
+				element: <DeleteBookPage />,
+			},
+		],
+	},
 	//? this is the single page route that will be rendered when the url is /
 	{
 		path: "/",
-		element: <div className="">hello world</div>,
+		element: <Navigate to="/dashboard/home" />,
 	},
 ]);

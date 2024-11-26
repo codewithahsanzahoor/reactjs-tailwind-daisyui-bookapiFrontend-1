@@ -58,3 +58,20 @@ export const createBook = async (data: FormData): Promise<{ id: string }> => {
 	});
 	return response.data;
 };
+
+export const deleteBook = async (id: string): Promise<{ id: string }> => {
+	const response = await api.delete(`/books/${id}`);
+	return response.data;
+};
+
+export const updateBook = async (
+	id: string,
+	data: FormData
+): Promise<{ id: string }> => {
+	const response = await api.put(`/books/${id}`, data, {
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+	});
+	return response.data;
+};

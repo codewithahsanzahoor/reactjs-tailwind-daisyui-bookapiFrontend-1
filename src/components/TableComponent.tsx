@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Book } from "../types";
 
 function TableComponent({ data }: { data: Book[] }) {
+	const navigate = useNavigate();
 	return (
 		<div id="tableforinfo">
 			<div className="overflow-x-auto">
@@ -10,7 +12,10 @@ function TableComponent({ data }: { data: Book[] }) {
 						<tr>
 							<th>
 								<label>
-									<input type="checkbox" className="checkbox" />
+									<input
+										type="checkbox"
+										className="checkbox"
+									/>
 								</label>
 							</th>
 							<th>Book Details</th>
@@ -25,7 +30,10 @@ function TableComponent({ data }: { data: Book[] }) {
 							<tr key={book._id}>
 								<th>
 									<label>
-										<input type="checkbox" className="checkbox" />
+										<input
+											type="checkbox"
+											className="checkbox"
+										/>
 									</label>
 								</th>
 								<td>
@@ -39,7 +47,9 @@ function TableComponent({ data }: { data: Book[] }) {
 											</div>
 										</div>
 										<div>
-											<div className="font-bold">{book.title}</div>
+											<div className="font-bold">
+												{book.title}
+											</div>
 											{/* <div className="text-sm opacity-50">United States</div> */}
 										</div>
 									</div>
@@ -48,21 +58,37 @@ function TableComponent({ data }: { data: Book[] }) {
 									{/* {book.author.name} */}
 									<br />
 									<span className="badge badge-ghost badge-sm">
-										{book.author.name}
+										{book.author?.name}
 									</span>
 								</td>
 								<td>
 									<div className="flex gap-2 flex-wrap">
-										<button className="btn btn-outline btn-success">
+										<button
+											className="btn btn-outline btn-success"
+											onClick={() =>
+												navigate(
+													`/dashboard/books/update/${book._id}`
+												)
+											}
+										>
 											Edit
 										</button>{" "}
-										<button className="btn btn-outline btn-error">
+										<button
+											className="btn btn-outline btn-error"
+											onClick={() =>
+												navigate(
+													`/books/delete/${book._id}`
+												)
+											}
+										>
 											Delete
 										</button>
 									</div>
 								</td>
 								<th>
-									<button className="btn btn-ghost btn-xs">details</button>
+									<button className="btn btn-ghost btn-xs">
+										details
+									</button>
 								</th>
 							</tr>
 						))}
