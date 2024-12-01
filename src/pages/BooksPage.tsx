@@ -1,14 +1,36 @@
+import { Link, useNavigate } from "react-router-dom";
+import { getAuthorBookPagination } from "../http/api";
 import { useQuery } from "react-query";
-import TableComponent from "../components/TableComponent";
-import { getBooks } from "../http/api";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function BooksPage() {
-	const { data } = useQuery({
-		queryKey: ["books"],
-		queryFn: getBooks,
-		staleTime: 1000 * 60 * 60,
-	});
+	const navigate = useNavigate();
+	const [page, setPage] = useState(1); // Manage current page state
+	const limit = 3; // Define how many items per page
+
+	const { data, isLoading, isError, error, isFetching, refetch } = useQuery(
+		["books", { page, limit }], // Use page from state
+		() => getAuthorBookPagination(page, limit), // Fetch data based on current page
+		{
+			keepPreviousData: true,
+			// staleTime: 1000 * 60 * 60,
+			onSuccess: (data) => {
+				// console.log("success", data);
+			},
+			onError: (error) => {
+				console.log("error while fetching the author books", error);
+			},
+		}
+	);
+
+	if (!data?.books?.length) {
+		return <div>No books found</div>;
+	}
+
+	const handlePageChange = (newPage: number) => {
+		setPage(newPage); // Update the current page
+		refetch(); // Refetch data for the new page
+	};
 
 	return (
 		<div id="books">
@@ -58,7 +80,127 @@ function BooksPage() {
 				</Link>
 			</div>
 			{/* NOTE: if data is null then return empty array */}
-			<TableComponent data={data ?? []} />
+			<div id="tableforinfo">
+				<div className="overflow-x-auto">
+					<table className="table">
+						{/* head */}
+						<thead>
+							<tr>
+								<th>
+									<label>
+										<input
+											type="checkbox"
+											className="checkbox"
+										/>
+									</label>
+								</th>
+								<th>Book Details</th>
+								<th>Author Name</th>
+								<th>Actions</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{/* row 1 */}
+							{data?.books?.map((book) => (
+								<tr key={book._id}>
+									<th>
+										<label>
+											<input
+												type="checkbox"
+												className="checkbox"
+											/>
+										</label>
+									</th>
+									<td>
+										<div className="flex items-center gap-3">
+											<div className="avatar">
+												<div className="mask mask-squircle h-12 w-12">
+													<img
+														src={book.coverImage}
+														alt="Avatar Tailwind CSS Component"
+													/>
+												</div>
+											</div>
+											<div>
+												<div className="font-bold">
+													{book.title}
+												</div>
+												{/* <div className="text-sm opacity-50">United States</div> */}
+											</div>
+										</div>
+									</td>
+									<td>
+										{/* {book.author.name} */}
+										<br />
+										<span className="badge badge-ghost badge-sm">
+											{book.author?.name}
+										</span>
+									</td>
+									<td>
+										<div className="flex gap-2 flex-wrap">
+											<button
+												className="btn btn-outline btn-success"
+												onClick={() =>
+													navigate(
+														`/dashboard/books/update/${book._id}`
+													)
+												}
+											>
+												Edit
+											</button>{" "}
+											<button
+												className="btn btn-outline btn-error"
+												onClick={() =>
+													navigate(
+														`/books/delete/${book._id}`
+													)
+												}
+											>
+												Delete
+											</button>
+										</div>
+									</td>
+									<th>
+										<button className="btn btn-ghost btn-xs">
+											details
+										</button>
+									</th>
+								</tr>
+							))}
+						</tbody>
+						{/* foot */}
+						<tfoot>
+							<tr>
+								<th></th>
+								<th>Book Details</th>
+								<th>Author Name</th>
+								<th>Actions</th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			<div className="flex justify-center items-center mt-4">
+				<div className="join">
+					<button
+						className="join-item btn"
+						onClick={() => handlePageChange(page - 1)}
+						disabled={page === 1}
+					>
+						«
+					</button>
+					<button className="join-item btn">{page}</button>
+					<button
+						className="join-item btn"
+						onClick={() => handlePageChange(page + 1)}
+						disabled={data?.books?.length < limit} // Disable if there are no more items
+					>
+						»
+					</button>
+				</div>
+			</div>
 		</div>
 	);
 }
