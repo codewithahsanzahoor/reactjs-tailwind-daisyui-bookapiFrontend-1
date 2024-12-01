@@ -45,8 +45,15 @@ export const register = async (data: {
 	return response.data;
 };
 
+//? this will get all the books by all the authors
 export const getBooks = async (): Promise<Book[]> => {
 	const response = await api.get("/books");
+	return response.data;
+};
+
+//? this will get the books of the author only created by the author
+export const authorBooks = async (): Promise<Book[]> => {
+	const response = await api.post("/books/author");
 	return response.data;
 };
 
@@ -73,5 +80,22 @@ export const updateBook = async (
 			"Content-Type": "multipart/form-data",
 		},
 	});
+	return response.data;
+};
+
+export const getAuthorBookPagination = async (
+	page: number,
+	limit: number
+): Promise<{
+	books: Book[];
+	pagination: {
+		totalPages: number;
+		currentPage: number;
+		itemsPerPage: number;
+	};
+}> => {
+	const response = await api.post(
+		`/books/booksPerPages?page=${page}&limit=${limit}`
+	);
 	return response.data;
 };
