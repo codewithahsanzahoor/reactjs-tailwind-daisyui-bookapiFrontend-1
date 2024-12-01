@@ -5,6 +5,9 @@ this project includes React, TypeScript and Vite.
 3. i am using tailwindcss for styling the app.
 4. i am using daisyui for styling the app.
 5. remix icons for icons.
+6. pagination for showing the books in pages.
+7. i am using react-hook-form for handling the form.
+8. full crud operations for books.
 
 ## Installation steps:
 1. pnpm create vite@latest
