@@ -4,7 +4,6 @@ import { Book } from "../types";
 import { getBooks, updateBook } from "../http/api";
 import { useMutation, useQuery } from "react-query";
 import { queryClient } from "../main";
-// FIXME: create the update book page it is like create book page as chatgpt is suggested use that method
 function UpdateBookPage() {
 	const { id } = useParams<{ id: string }>(); // Type for route params
 	const navigate = useNavigate();
@@ -225,7 +224,6 @@ function UpdateBookPage() {
 										: "btn btn-primary mt-4 font-semibold text-xl"
 								}
 								onClick={(e) => {
-									e.preventDefault();
 									handleFormSubmit(e);
 								}}
 							>
